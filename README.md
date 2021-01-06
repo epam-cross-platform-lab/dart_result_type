@@ -40,7 +40,7 @@
 
     ```yaml
     dependencies:
-    result_type: ^0.0.1
+      result_type: ^0.0.1
     ```
 
 2. Install it
@@ -50,13 +50,13 @@
     with pub:
 
     ```sh
-    pub get
+      pub get
     ```
 
     with Flutter:
 
     ```sh
-    flutter pub get
+      flutter pub get
     ```
 
     Alternatively, your editor might support pub get or flutter pub get. Check the docs for your editor to learn more.
@@ -66,7 +66,7 @@
     Now in your Dart code, you can use:
 
     ```dart
-    import 'package:result_type/result_type.dart';
+      import 'package:result_type/result_type.dart';
     ```
 
 ## Example
