@@ -1,6 +1,10 @@
 <h1 align="center">Result Type for Dart</h1>
 
 <p align="center">
+    <a href="https://github.com/epam-cross-platform-lab/dart_result_type/actions">
+    <img src="https://github.com/epam-cross-platform-lab/dart_result_type/workflows/Dart/badge.svg" alt="CI Status" />
+  </a>
+  
   <a href="https://github.com/epam-cross-platform-lab/dart_result_type/blob/main/LICENSE">
     <img src="https://img.shields.io/badge/license-Apache-blue.svg" alt="Result Type is released under the Apache license." />
   </a>
@@ -13,7 +17,6 @@
     <img src="https://img.shields.io/badge/PRs-welcome-brightgreen.svg" alt="PRs welcome!" />
   </a>
 </p>
-
 
 # Content
 
