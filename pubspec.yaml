@@ -1,14 +1,14 @@
 name: result_type
 version: 0.0.1
 description: Result Type
-authors:
-  - "Sasha Prokhorenko"
 repository: https://github.com/minikin/dart_result_type
 
 environment:
-  sdk: ">=2.10.4 <3.0.0"
+  sdk: ">=2.9.0 <3.0.0"
+
+dependencies:
+  meta: ^1.2.4
 
 dev_dependencies:
   http: ^0.12.2
-  pedantic: ^1.9.1
   test: ^1.15.7

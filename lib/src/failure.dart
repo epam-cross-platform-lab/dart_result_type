@@ -1,6 +1,9 @@
+import 'package:meta/meta.dart';
+
 import 'result.dart';
 
 /// A failure, storing a [Failure] value.
+@immutable
 class Failure<S, F> extends Result<S, F> {
   final F value;
 

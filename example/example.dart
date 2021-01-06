@@ -46,7 +46,7 @@ extension PhotoExtension on Photo {
   static List<Photo> parsePhotos(String responseBody) {
     final jsonObject = jsonDecode(responseBody) as Iterable;
     return jsonObject
-        .map<Photo>((json) => Photo.fromJson((json as Map<String, Object>)))
+        .map<Photo>((json) => Photo.fromJson(json as Map<String, Object>))
         .toList();
   }
 }
@@ -68,7 +68,7 @@ Future<Result<List<Photo>, NetworkError>> getPhotos(http.Client client) async {
   try {
     final jsonString = await client.get(path);
     return Success(PhotoExtension.parsePhotos(jsonString.body));
-  } catch (error) {
+  } on NetworkError catch (_) {
     return Failure(NetworkError.notFound);
   }
 }
