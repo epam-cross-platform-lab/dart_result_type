@@ -81,7 +81,7 @@ cd example && dart run
 
 ## Support
 
-Post issues and feature requests on the GitHub [issue tracker][issues].
+Post issues and feature requests on the GitHub [issue tracker](https://github.com/epam-cross-platform-lab/dart_result_type/issues).
 
 ## License
 
