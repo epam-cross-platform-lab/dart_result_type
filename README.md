@@ -26,7 +26,9 @@
 
 ## Features
 
+Result is a type that represents either success [Success] or failure [Failure].
 
+See the [documentation]() for details.
 
 ## Requirements
 
