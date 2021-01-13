@@ -4,7 +4,11 @@
     <a href="https://github.com/epam-cross-platform-lab/dart_result_type/actions">
     <img src="https://github.com/epam-cross-platform-lab/dart_result_type/workflows/Dart/badge.svg" alt="CI Status" />
   </a>
-  
+   
+  <a href="https://codecov.io/gh/epam-cross-platform-lab/dart_result_type">
+    <img src="https://codecov.io/gh/epam-cross-platform-lab/dart_result_type/branch/main/graph/badge.svg?token=8HOYKOPG31"/>
+  </a>
+    
   <a href="https://github.com/epam-cross-platform-lab/dart_result_type/blob/main/LICENSE">
     <img src="https://img.shields.io/badge/license-Apache-blue.svg" alt="Result Type is released under the Apache license." />
   </a>
