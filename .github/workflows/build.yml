@@ -28,6 +28,9 @@ jobs:
       - name: Analyze project source
         run: dartanalyzer --fatal-infos --fatal-warnings ./lib
 
+      - name: Active coverage
+        run: pub global activate coverage
+
       - name: Run tests
         run: dart test test/test_all.dart
 
