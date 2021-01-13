@@ -9,7 +9,9 @@ typedef Completion<T> = void Function(T value);
 abstract class Result<S, F> {
   Result() {
     if (!isFailure && !isSuccess) {
-      throw Exception('The Result must be a [Success] or a [Failure].');
+      throw Exception(
+        'The Result must be a [Success] or a [Failure].',
+      );
     }
   }
 
@@ -26,7 +28,8 @@ abstract class Result<S, F> {
     }
 
     throw Exception(
-        'Make sure that result [isFailure] before accessing [failure]');
+      'Make sure that result [isFailure] before accessing [failure]',
+    );
   }
 
   /// Returns a new value of [Success] result.
@@ -36,7 +39,8 @@ abstract class Result<S, F> {
     }
 
     throw Exception(
-        'Make sure that result [isSuccess] before accessing [success]');
+      'Make sure that result [isSuccess] before accessing [success]',
+    );
   }
 
   /// Returns a new value of [Result] from closure.

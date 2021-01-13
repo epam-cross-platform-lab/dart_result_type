@@ -29,7 +29,11 @@
 .packages
 .pub-cache/
 .pub/
+doc
 /build/
+.buildlog
+.dart_tool/
+web/experimental
 
 # Web related
 lib/generated_plugin_registrant.dart
@@ -44,3 +48,15 @@ app.*.map.json
 /android/app/debug
 /android/app/profile
 /android/app/release
+
+# Or the files created by dart2js.
+*.dart.js
+*.js_
+*.js.deps
+*.js.map
+
+# Include when developing application packages.
+pubspec.lock
+coverage*
+nohup.out
+lcov.info

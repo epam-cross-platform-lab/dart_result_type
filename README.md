@@ -39,44 +39,14 @@ See the [documentation]() for details.
 
 ## Install
 
-1. Depend on it
-
-    Add this to your package's pubspec.yaml file:
-
-    ```yaml
-    dependencies:
-      result_type: ^0.0.1
-    ```
-
-2. Install it
-
-    You can install packages from the command line:
-
-    with pub:
-
-    ```sh
-      pub get
-    ```
-
-    with Flutter:
-
-    ```sh
-      flutter pub get
-    ```
-
-    Alternatively, your editor might support pub get or flutter pub get. Check the docs for your editor to learn more.
-
-3. Import it
-
-    Now in your Dart code, you can use:
-
-    ```dart
-      import 'package:result_type/result_type.dart';
-    ```
+```yaml
+dependencies:
+  result_type: ^0.0.1
+```
 
 ## Example
 
-To see examples of the following package on a device or simulator:
+To see examples of the following package:
 
 ```sh
 cd example && dart run
