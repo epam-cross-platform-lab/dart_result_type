@@ -1,6 +1,6 @@
 name: result_type
 version: 0.0.1
-description: Result Type
+description: Result Type represents either a success or a failure, including an associated value in each case.
 repository: https://github.com/minikin/dart_result_type
 
 environment:
