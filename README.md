@@ -80,17 +80,19 @@ void main() async {
     print('Error: ${result.failure}');
   }
 
-  /// Use flatMap to unbox nested Results and apply transformation.
+  /// In this example, note the difference in the result of using `map` and
+  /// `flatMap` with a transformation that returns an result type.
   Result<int, Error> getNextInteger() => Success(random.nextInt(4));
   Result<int, Error> getNextAfterInteger(int n) => Success(random.nextInt(n + 1));
 
   final nextIntegerNestedResults = getNextInteger().map(getNextAfterInteger);
   print(nextIntegerNestedResults.runtimeType);
-  // Prints: Success<Result<int, Error>, dynamic>
+  /// `Prints`: Success<Result<int, Error>, dynamic>
 
-  final nextIntegerUnboxedResults = getNextInteger().flatMap(getNextAfterInteger);
+  final nextIntegerUnboxedResults =
+      getNextInteger().flatMap(getNextAfterInteger);
   print(nextIntegerUnboxedResults.runtimeType);
-  // Prints: Success<int, Error>
+  /// `Prints`: Success<int, Error>
 
   /// Use completion handler / callback style API if you want to.
   await getPhotos(client)

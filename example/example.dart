@@ -26,7 +26,8 @@ void main() async {
     print('Error: ${result.failure}');
   }
 
-  /// Use flatMap to unbox nested Results and apply transformation
+  /// In this example, note the difference in the result of using `map` and
+  /// `flatMap` with a transformation that returns an result type.
   Result<int, Error> getNextInteger() => Success(random.nextInt(4));
   Result<int, Error> getNextAfterInteger(int n) =>
       Success(random.nextInt(n + 1));
