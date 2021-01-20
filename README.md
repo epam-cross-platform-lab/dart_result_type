@@ -89,8 +89,7 @@ void main() async {
   print(nextIntegerNestedResults.runtimeType);
   /// `Prints`: Success<Result<int, Error>, dynamic>
 
-  final nextIntegerUnboxedResults =
-      getNextInteger().flatMap(getNextAfterInteger);
+  final nextIntegerUnboxedResults =  getNextInteger().flatMap(getNextAfterInteger);
   print(nextIntegerUnboxedResults.runtimeType);
   /// `Prints`: Success<int, Error>
 
