@@ -1,24 +1,51 @@
 import 'dart:async';
 import 'dart:convert';
+import 'dart:math';
 
 import 'package:http/http.dart' as http;
 import 'package:result_type/result_type.dart';
 
 void main() async {
+  final random = Random();
   final client = http.Client();
-
   final result = await getPhotos(client);
-  if (result.isFailure) {
-    print('Error: ${result.failure}');
+
+  /// Do something with successful operation results or handle an error.
+  if (result.isSuccess) {
+    print('Photos Items: ${result.success}');
   } else {
-    print('Photos: ${result.success}');
+    print('Error: ${result.failure}');
   }
 
+  /// Apply transformation to successful operation results or handle an error.
+  if (result.isSuccess) {
+    final items =
+        result.map((i) => i.where((j) => j.title.length > 60)).success;
+    print('Number of Long Titles: ${items.length}');
+  } else {
+    print('Error: ${result.failure}');
+  }
+
+  /// Use flatMap to unbox nested Results and apply transformation
+  Result<int, Error> getNextInteger() => Success(random.nextInt(4));
+  Result<int, Error> getNextAfterInteger(int n) =>
+      Success(random.nextInt(n + 1));
+
+  final nextIntegerNestedResults = getNextInteger().map(getNextAfterInteger);
+  print(nextIntegerNestedResults.runtimeType);
+  // Prints: Success<Result<int, Error>, dynamic>
+
+  final nextIntegerUnboxedResults =
+      getNextInteger().flatMap(getNextAfterInteger);
+  print(nextIntegerUnboxedResults.runtimeType);
+  // Prints: Success<int, Error>
+
+  /// Use completion handler / callback style API if you want to.
   await getPhotos(client)
-    ..result((error) {
-      print('Error: $error');
-    }, (photos) {
+    ..result((photos) {
       print('Photos: $photos');
+    }, (error) {
+      print('Error: $error');
     });
 }
 

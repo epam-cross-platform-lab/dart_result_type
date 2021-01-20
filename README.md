@@ -4,11 +4,11 @@
     <a href="https://github.com/epam-cross-platform-lab/dart_result_type/actions">
     <img src="https://github.com/epam-cross-platform-lab/dart_result_type/workflows/Dart/badge.svg" alt="CI Status" />
   </a>
-   
+
   <a href="https://codecov.io/gh/epam-cross-platform-lab/dart_result_type">
     <img src="https://codecov.io/gh/epam-cross-platform-lab/dart_result_type/branch/main/graph/badge.svg?token=8HOYKOPG31"/>
   </a>
-    
+
   <a href="https://github.com/epam-cross-platform-lab/dart_result_type/blob/main/LICENSE">
     <img src="https://img.shields.io/badge/license-Apache-blue.svg" alt="Result Type is released under the Apache license." />
   </a>
@@ -33,9 +33,9 @@
 
 ## Features
 
-Result is a type that represents either success [Success] or failure [Failure].
+Result is a type that represents either [Success](https://github.com/epam-cross-platform-lab/dart_result_type/blob/main/lib/src/success.dart) or [Failure](https://github.com/epam-cross-platform-lab/dart_result_type/blob/main/lib/src/failure.dart).
 
-See the [documentation]() for details.
+Inspired by functional programming, [Rust](https://doc.rust-lang.org/std/result/enum.Result.html) and [Swift](https://developer.apple.com/documentation/swift/result).
 
 ## Requirements
 
@@ -50,7 +50,59 @@ dependencies:
 
 ## Example
 
-To see examples of the following package:
+The detailed example can be found at [result_type/example/example.dart](https://github.com/epam-cross-platform-lab/dart_result_type/blob/main/example/example.dart).
+
+```dart
+import 'dart:async';
+import 'dart:convert';
+import 'dart:math';
+
+import 'package:http/http.dart' as http;
+import 'package:result_type/result_type.dart';
+
+void main() async {
+  final random = Random();
+  final client = http.Client();
+  final result = await getPhotos(client);
+
+  /// Do something with successful operation results or handle an error.
+  if (result.isSuccess) {
+    print('Photos Items: ${result.success}');
+  } else {
+    print('Error: ${result.failure}');
+  }
+
+  /// Apply transformation to successful operation results or handle an error.
+  if (result.isSuccess) {
+    final items = result.map((i) => i.where((j) => j.title.length > 60)).success;
+    print('Number of Long Titles: ${items.length}');
+  } else {
+    print('Error: ${result.failure}');
+  }
+
+  /// Use flatMap to unbox nested Results and apply transformation.
+  Result<int, Error> getNextInteger() => Success(random.nextInt(4));
+  Result<int, Error> getNextAfterInteger(int n) => Success(random.nextInt(n + 1));
+
+  final nextIntegerNestedResults = getNextInteger().map(getNextAfterInteger);
+  print(nextIntegerNestedResults.runtimeType);
+  // Prints: Success<Result<int, Error>, dynamic>
+
+  final nextIntegerUnboxedResults = getNextInteger().flatMap(getNextAfterInteger);
+  print(nextIntegerUnboxedResults.runtimeType);
+  // Prints: Success<int, Error>
+
+  /// Use completion handler / callback style API if you want to.
+  await getPhotos(client)
+    ..result((photos) {
+      print('Photos: $photos');
+    }, (error) {
+      print('Error: $error');
+    });
+}
+```
+
+To see examples of the following package in action:
 
 ```sh
 cd example && dart run
