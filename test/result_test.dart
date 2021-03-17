@@ -7,7 +7,7 @@ import 'utils/mock_error.dart';
 
 void main() {
   group('Result:', () {
-    Random random;
+    Random? random;
 
     setUp(() {
       random = Random();
@@ -133,9 +133,9 @@ void main() {
     });
 
     test('Apply flatMap transformation to successful operation results', () {
-      Result<int, MockError> getNextInteger() => Success(random.nextInt(4));
+      Result<int, MockError> getNextInteger() => Success(random!.nextInt(4));
       Result<int, MockError> getNextAfterInteger(int n) =>
-          Success(random.nextInt(n + 1));
+          Success(random!.nextInt(n + 1));
 
       final nextIntegerUnboxedResults =
           getNextInteger().flatMap(getNextAfterInteger);
@@ -177,7 +177,7 @@ void main() {
     test(
         '''flatMapError does not apply transformation to success operation results''',
         () {
-      Result<int, MockError> getNextInteger() => Success(random.nextInt(4));
+      Result<int, MockError> getNextInteger() => Success(random!.nextInt(4));
       Result<int, MockError> getNextAfterInteger(MockError error) =>
           Failure(MockError(error.code));
 
