@@ -20,7 +20,7 @@ void main() async {
   /// Apply transformation to successful operation results or handle an error.
   if (result.isSuccess) {
     final items =
-        result.map((i) => i.where((j) => j.title!.length > 60)).success;
+        result.map((i) => i.where((j) => j.title.length > 60)).success;
     print('Number of Long Titles: ${items.length}');
   } else {
     print('Error: ${result.failure}');
@@ -51,17 +51,22 @@ void main() async {
 }
 
 class Photo {
-  final int? id;
-  final String? title;
-  final String? thumbnailUrl;
+  final int id;
+  final String title;
+  final String thumbnailUrl;
 
-  const Photo({this.id, this.title, this.thumbnailUrl});
+  const Photo({
+    required this.id,
+    required this.title,
+    required this.thumbnailUrl,
+  });
 
   factory Photo.fromJson(Map<String, Object> json) {
+    print(json);
     return Photo(
-      id: json['id'] as int?,
-      title: json['title'] as String?,
-      thumbnailUrl: json['thumbnailUrl'] as String?,
+      id: json['id'] as int,
+      title: json['title'] as String,
+      thumbnailUrl: json['thumbnailUrl'] as String,
     );
   }
 
@@ -74,16 +79,19 @@ extension PhotoExtension on Photo {
   static List<Photo> parsePhotos(String responseBody) {
     final jsonObject = jsonDecode(responseBody) as Iterable;
     return jsonObject
-        .map<Photo>((json) => Photo.fromJson(json as Map<String, Object>))
+        .map<Photo>((json) => Photo.fromJson(Map<String, Object>.from(json)))
         .toList();
   }
 }
 
 class NetworkError implements Exception {
-  final int? code;
-  final String? description;
+  final int code;
+  final String description;
 
-  const NetworkError({this.code, this.description});
+  const NetworkError({
+    required this.code,
+    required this.description,
+  });
 
   @override
   String toString() => 'NetworkError(code: $code, description: $description)';
