@@ -27,7 +27,7 @@ jobs:
         run: dart format --set-exit-if-changed lib test example
 
       - name: Analyze project source
-        run: dartanalyzer --fatal-infos --fatal-warnings
+        run: dartanalyzer --fatal-infos --fatal-warnings lib test example
 
       - name: Active coverage
         run: pub global activate coverage
