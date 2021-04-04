@@ -39,13 +39,13 @@ Inspired by functional programming, [Rust](https://doc.rust-lang.org/std/result/
 
 ## Requirements
 
-- Dart: 2.9.0+
+- Dart: 2.12.0+
 
 ## Install
 
 ```yaml
 dependencies:
-  result_type: ^0.0.1
+  result_type: ^0.1.0
 ```
 
 ## Example
