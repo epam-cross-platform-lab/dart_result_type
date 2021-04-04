@@ -55,9 +55,14 @@ class Photo {
   final String title;
   final String thumbnailUrl;
 
-  const Photo({this.id, this.title, this.thumbnailUrl});
+  const Photo({
+    required this.id,
+    required this.title,
+    required this.thumbnailUrl,
+  });
 
   factory Photo.fromJson(Map<String, Object> json) {
+    print(json);
     return Photo(
       id: json['id'] as int,
       title: json['title'] as String,
@@ -74,7 +79,7 @@ extension PhotoExtension on Photo {
   static List<Photo> parsePhotos(String responseBody) {
     final jsonObject = jsonDecode(responseBody) as Iterable;
     return jsonObject
-        .map<Photo>((json) => Photo.fromJson(json as Map<String, Object>))
+        .map<Photo>((json) => Photo.fromJson(Map<String, Object>.from(json)))
         .toList();
   }
 }
@@ -83,7 +88,10 @@ class NetworkError implements Exception {
   final int code;
   final String description;
 
-  const NetworkError({this.code, this.description});
+  const NetworkError({
+    required this.code,
+    required this.description,
+  });
 
   @override
   String toString() => 'NetworkError(code: $code, description: $description)';
@@ -94,7 +102,7 @@ class NetworkError implements Exception {
 Future<Result<List<Photo>, NetworkError>> getPhotos(http.Client client) async {
   const path = 'https://jsonplaceholder.typicode.com/photos';
   try {
-    final jsonString = await client.get(path);
+    final jsonString = await client.get(Uri.parse(path));
     return Success(PhotoExtension.parsePhotos(jsonString.body));
   } on NetworkError catch (_) {
     return Failure(NetworkError.notFound);
