@@ -1,5 +1,4 @@
-// ignore_for_file: lines_longer_than_80_chars
-// ignore_for_file: avoid_shadowing_type_parameters
+// ignore_for_file: lines_longer_than_80_chars, avoid_shadowing_type_parameters
 import 'failure.dart';
 import 'success.dart';
 
