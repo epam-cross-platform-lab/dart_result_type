@@ -11,6 +11,7 @@ analyzer:
 
 linter:
   rules:
+    - avoid_shadowing_type_parameters
     - avoid_private_typedef_functions
     - avoid_returning_null
     - avoid_setters_without_getters
