@@ -100,6 +100,14 @@ void main() async {
     }, (error) {
       print('Error: $error');
     });
+
+  /// Use fold style API if you want to.
+  final resultValue = (await getPhotos(client)).fold((photos) {
+    return 'Photos: $photos';
+  }, (error) {
+    return 'Error: $error';
+  });
+  print('Result: $resultValue');
 }
 ```
 

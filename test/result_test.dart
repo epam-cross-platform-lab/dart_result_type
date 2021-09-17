@@ -53,6 +53,24 @@ void main() {
         });
     });
 
+    test('Returns Success value from fold', () {
+      final result = getUser(value: true);
+      final userValue = result.fold(
+        (success) => "Success: $success",
+        (failure) => "Failure: $failure",
+      );
+      expect(userValue, 'Success: John Doe');
+    });
+
+    test('Returns Failure from fold', () {
+      final result = getUser(value: false);
+      final userValue = result.fold(
+        (success) => "Success: $success",
+        (failure) => "Failure: ${failure.code}",
+      );
+      expect(userValue, "Failure: ${const MockError(404).code}");
+    });
+
     test(
         '''Throw Exception when accessing success value without checking if isSuccess''',
         () {
