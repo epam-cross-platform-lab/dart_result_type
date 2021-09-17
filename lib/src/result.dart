@@ -68,8 +68,6 @@ abstract class Result<S, F> {
   /// This example shows how to use completion handler.
   ///
   /// ```dart
-  /// final result = await getPhotos();
-  ///
   /// await getPhotos(client)
   /// ..result((photos) {
   ///   print('Photos: $photos');
@@ -87,6 +85,28 @@ abstract class Result<S, F> {
     if (isFailure) {
       final right = this as Failure<S, F>;
       failure(right.value);
+    }
+  }
+
+  /// Fold [Success] and [Failure] into the value of one type
+  ///
+  /// This example shows how to use fold value.
+  ///
+  /// ```dart
+  /// final resultValue = (await getPhotos(client))
+  /// .fold((photos) {
+  ///   return 'Photos: $photos';
+  /// }, (error) {
+  ///   return 'Error: $error';
+  /// });
+  /// print('Result: resultValue');
+  /// ```
+
+  B fold<B>(B Function(S success) success, B Function(F failure) failure) {
+    if (isSuccess) {
+      return success(this.success);
+    } else {
+      return failure(this.failure);
     }
   }
 
