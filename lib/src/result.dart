@@ -68,8 +68,6 @@ abstract class Result<S, F> {
   /// This example shows how to use completion handler.
   ///
   /// ```dart
-  /// final result = await getPhotos();
-  ///
   /// await getPhotos(client)
   /// ..result((photos) {
   ///   print('Photos: $photos');
@@ -90,6 +88,28 @@ abstract class Result<S, F> {
     }
   }
 
+  /// Fold [Success] and [Failure] into the value of one type
+  ///
+  /// This example shows how to use fold value.
+  ///
+  /// ```dart
+  /// final resultValue = (await getPhotos(client))
+  /// .fold((photos) {
+  ///   return 'Photos: $photos';
+  /// }, (error) {
+  ///   return 'Error: $error';
+  /// });
+  /// print('Result: resultValue');
+  /// ```
+
+  B fold<B>(B Function(S success) success, B Function(F failure) failure) {
+    if (isSuccess) {
+      return success(this.success);
+    } else {
+      return failure(this.failure);
+    }
+  }
+
   /// Maps a [Result<S, F>] to [Result<U, F>] by applying a function
   /// to a contained [Success] value, leaving an [Failure] value untouched.
   /// This function can be used to compose the results of two functions.
@@ -107,14 +127,13 @@ abstract class Result<S, F> {
   /// }
   /// ```
   ///
-  Result<U, F> map<U, F>(U Function(S) transform) {
-    if (isSuccess) {
-      final left = this as Success<S, F>;
-      return Success(transform(left.value));
-    } else {
-      final right = this as Failure<S, F>;
-      return Failure(right.value);
-    }
+  Result<U, F> map<U>(U Function(S) transform) {
+    return fold(
+      (success) => Success<U, F>(
+        transform(success),
+      ),
+      (failure) => Failure(failure),
+    );
   }
 
   /// Maps a [Result<S, F>] to [Result<S, E>] by applying a function
@@ -123,14 +142,13 @@ abstract class Result<S, F> {
   /// This function can be used to pass through a successful result
   /// while applying transformation to [Failure].
   ///
-  Result<S, E> mapError<S, E>(E Function(F) transform) {
-    if (isSuccess) {
-      final left = this as Success<S, F>;
-      return Success(left.value);
-    } else {
-      final right = this as Failure<S, F>;
-      return Failure(transform(right.value));
-    }
+  Result<S, E> mapError<E>(E Function(F) transform) {
+    return fold(
+      (success) => Success(success),
+      (failure) => Failure<S, E>(
+        transform(failure),
+      ),
+    );
   }
 
   /// Maps a [Result<S, F>] to [Result<U, F>] by applying a function
